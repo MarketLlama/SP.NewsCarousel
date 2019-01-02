@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sp-news-carousel-client-side-solution",
+    "id": "5a389e4b-ae5d-4cc6-aa2d-99a750201d5b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/sp-news-carousel.sppkg"
+  }
+}

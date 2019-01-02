@@ -1,0 +1,13 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.7.0",
+    "libraryName": "sp-news-carousel",
+    "libraryId": "5a389e4b-ae5d-4cc6-aa2d-99a750201d5b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "framework": "react",
+    "isCreatingSolution": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
