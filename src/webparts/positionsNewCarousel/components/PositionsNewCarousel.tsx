@@ -111,6 +111,7 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      mobileFirst:true,//add this one
       autoplay : true
     };
     return (
@@ -135,12 +136,13 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
 
   public componentDidMount() {
     this.createNewsFlow();
+    setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 0); 
   }
 
   private _onRenderNewsCell = (item : newsItem) : JSX.Element =>{
     return (
       <div onClick={() => window.location.href = item.PageURL}>
-          <div style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px'}}>
+          <div onLoad={() => window.dispatchEvent(new Event('resize'))} style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px', width: '100%'}}>
             <div className={styles["carousel-caption"]}>        
               <h3 className={styles["news-title"]}>{item.Title}</h3>
               <p>{item.NewsTeaser}</p>                 
