@@ -7,6 +7,7 @@ import { SPComponentLoader } from '@microsoft/sp-loader';
 import {sp , Web}  from '@pnp/pnpjs';
 import { Item } from '@pnp/sp';
 import Slider from "react-slick";
+import Moment from 'react-moment';
 
 export interface newsItem {
   Title : string;
@@ -116,9 +117,13 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
     };
     return (
       <div className={ styles.positionsNewCarousel }>
-         <Slider {...settings}>
-          {this.state.news}
-         </Slider>
+          <div className="ms-Grid-row">
+            <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
+              <Slider {...settings}>
+                {this.state.news}
+              </Slider>
+              </div>
+            </div>
       </div>
     );
   }
@@ -141,10 +146,11 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
 
   private _onRenderNewsCell = (item : newsItem) : JSX.Element =>{
     return (
-      <div onClick={() => window.location.href = item.PageURL}>
+      <div className="animated fadeIn" onClick={() => window.location.href = item.PageURL + '?isNews=1'} style={{cursor:'pointer'}}>
           <div onLoad={() => window.dispatchEvent(new Event('resize'))} style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px', width: '100%'}}>
             <div className={styles["carousel-caption"]}>        
-              <h3 className={styles["news-title"]}>{item.Title}</h3>
+              <h2 className={styles["news-title"]} onClick={() => window.location.href = item.PageURL + '?isNews=1'}>{item.Title}</h2>
+              <i><Moment format="DD/MM/YYYY">{item.NewsDate}</Moment></i>
               <p>{item.NewsTeaser}</p>                 
             </div> 
           </div>
