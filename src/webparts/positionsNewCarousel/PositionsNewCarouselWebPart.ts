@@ -1,3 +1,11 @@
+/**IE Pollyfill */
+
+import 'core-js/es6/array';
+import 'es6-map/implement';
+import 'core-js/es6/promise';
+import 'whatwg-fetch';
+import "@pnp/polyfill-ie11";
+
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
