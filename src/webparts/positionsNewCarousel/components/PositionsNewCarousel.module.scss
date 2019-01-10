@@ -94,5 +94,11 @@
         color:#BFC733 !important;
     }
   }
-  
+  @media screen and (max-width: 800px){
+      .carousel-caption {
+        word-wrap: break-word;
+        white-space: normal;
+        position: relative;
+      }
+    }
 }

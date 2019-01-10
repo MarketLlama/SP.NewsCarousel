@@ -40,9 +40,9 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
 
         let promises = [];
         items.forEach(item => {
-          
-          let htmlValues = new Item(web.lists.getByTitle('Pages').items.getById(item.Page.ID), "FieldValuesAsHtml");
-          let textValue = new  Item(web.lists.getByTitle('Pages').items.getById(item.Page.ID), "FieldValuesAsText");
+          let pageId = item.Page[0].ID;
+          let htmlValues = new Item(web.lists.getByTitle('Pages').items.getById(pageId), "FieldValuesAsHtml");
+          let textValue = new  Item(web.lists.getByTitle('Pages').items.getById(pageId), "FieldValuesAsText");
 
           let imagePromise =  htmlValues.select("PublishingRollupImage").get();
           let fileRefPromise =  textValue.select("FileRef").get();
@@ -80,11 +80,11 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
             } else {
               imageSrc = item.item.NewsImage;
             }
-
+            let pageId = item.item.Page[0].ID;
             newsItems.push({
               Title : item.item.Title,
               NewsDate : item.item.NewsDate,
-              PageId : item.item.Page.ID,
+              PageId : pageId,
               PageURL : item.file,
               NewsTeaser : item.item.NewsTeaser,
               ImgageURL : imageSrc,
@@ -150,7 +150,7 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
           <div onLoad={() => window.dispatchEvent(new Event('resize'))} style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px', width: '100%'}}>
             <div className={styles["carousel-caption"]}>        
               <h2 className={styles["news-title"]} onClick={() => window.location.href = item.PageURL + '?isNews=1'}>{item.Title}</h2>
-              <i><Moment format="DD/MM/YYYY">{item.NewsDate}</Moment></i>
+              <i><Moment format="YYYY-MM-DD">{item.NewsDate}</Moment></i>
               <p>{item.NewsTeaser}</p>                 
             </div> 
           </div>
