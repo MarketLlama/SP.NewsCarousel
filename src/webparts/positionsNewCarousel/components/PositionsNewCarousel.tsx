@@ -30,7 +30,7 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
   }
 
   private _getAllNews = async () : Promise<newsItem[]> =>{
-    return new Promise<newsItem[]>((resolve, reject) =>{ 
+    return new Promise<newsItem[]>((resolve, reject) =>{
       let newsItems : newsItem[] = [];
       const web = new Web(this.props.context.pageContext.site.absoluteUrl + '/articles');
 
@@ -58,10 +58,10 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
           });
           promises.push(promise);
         });
-        //TODO: Fix spaghetti code. 
+        //TODO: Fix spaghetti code.
         Promise.all(promises).then(_items =>{
           _items.forEach(item =>{
-            //Get src of publishing image 
+            //Get src of publishing image
             //Mark sure RenditionID is within query string or performace will be shite.
             const image = item.image;
             let imageSrc : string = "";
@@ -76,7 +76,7 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
                 }
               } else {
                 imageSrc = '';
-              } 
+              }
             } else {
               imageSrc = item.item.NewsImage;
             }
@@ -94,13 +94,13 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
           });
           resolve(newsItems);
         });
-        
+
       }, _error =>{
         reject(newsItems);
       });
     });
   }
-  
+
   public render(): React.ReactElement<IPositionsNewCarouselProps> {
 
     SPComponentLoader.loadCss('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
@@ -136,25 +136,27 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
     }
     this.setState({
       news : news
-    });  
+    });
   }
 
   public componentDidMount() {
     this.createNewsFlow();
-    setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 0); 
+    setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 0);
   }
 
   private _onRenderNewsCell = (item : newsItem) : JSX.Element =>{
     return (
-      <div className="animated fadeIn" onClick={() => window.location.href = item.PageURL + '?isNews=1'} style={{cursor:'pointer'}}>
-          <div onLoad={() => window.dispatchEvent(new Event('resize'))} style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px', width: '100%'}}>
-            <div className={styles["carousel-caption"]}>        
-              <h2 className={styles["news-title"]} onClick={() => window.location.href = item.PageURL + '?isNews=1'}>{item.Title}</h2>
-              <i><Moment format="YYYY-MM-DD">{item.NewsDate}</Moment></i>
-              <p>{item.NewsTeaser}</p>                 
-            </div> 
-          </div>
-      </div>
+      <a href={item.PageURL + '?isNews=1'} style={{textDecoration: 'none',color: 'inherit'}}>
+        <div className="animated fadeIn" style={{cursor:'pointer'}}>
+            <div onLoad={() => window.dispatchEvent(new Event('resize'))} style={{backgroundSize : 'cover', backgroundImage : 'url(' + item.ImgageURL + ')', height: '350px', width: '100%'}}>
+              <div className={styles["carousel-caption"]}>
+                <h2 className={styles["news-title"]}>{item.Title}</h2>
+                <i><Moment format="YYYY-MM-DD">{item.NewsDate}</Moment></i>
+                <p>{item.NewsTeaser}</p>
+              </div>
+            </div>
+        </div>
+      </a>
     );
   }
 }
