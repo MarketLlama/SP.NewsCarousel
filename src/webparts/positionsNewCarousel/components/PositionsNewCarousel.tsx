@@ -141,7 +141,7 @@ export default class PositionsNewCarousel extends React.Component<IPositionsNewC
 
   public componentDidMount() {
     this.createNewsFlow();
-    setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 0);
+    //setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 0);
   }
 
   private _onRenderNewsCell = (item : newsItem) : JSX.Element =>{
